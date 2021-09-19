@@ -13,7 +13,6 @@ public class UserInterface implements IUserInterface {
     private static final String INPUT_MESSAGE = "Введите в терминале ";
     private static final String OUTPUT_MESSAGE = "Выводим результат поиска: %n ";
     private static final String ERROR_MESSAGE = "Произошла ошибка: ";
-
     private static final Logger logger = Logger.getLogger(UserInterface.class);
 
     @Override
