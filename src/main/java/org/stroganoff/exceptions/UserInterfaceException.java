@@ -11,4 +11,8 @@ public class UserInterfaceException extends Exception {
     public UserInterfaceException(String message, Throwable cause) {
         super(message, cause);
     }
+
+    public UserInterfaceException(Throwable cause) {
+        super(cause);
+    }
 }

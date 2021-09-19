@@ -1,9 +1,12 @@
 package org.stroganoff;
 
+import org.stroganoff.exceptions.UserInterfaceException;
+
 import java.io.BufferedReader;
 
 public interface IUserInterface {
-    String getStringFromUser(BufferedReader reader);
+
+    String getStringFromUser(BufferedReader reader) throws UserInterfaceException;
 
     void showInputMessage(String inputMessage);
 

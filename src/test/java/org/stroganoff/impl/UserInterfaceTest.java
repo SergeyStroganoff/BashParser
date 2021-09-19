@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.stroganoff.exceptions.UserInterfaceException;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -22,7 +23,7 @@ class UserInterfaceTest {
     UserInterface userInterface;
 
     @Test
-    void getStringFromUser_Return_TestString() throws IOException {
+    void getStringFromUser_Return_TestString() throws IOException, UserInterfaceException {
         // GIVEN
         String expectedString = "test";
         BufferedReader reader = Mockito.mock(BufferedReader.class);
