@@ -1,5 +1,7 @@
 package org.stroganoff.impl;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.stroganoff.IUserInterface;
 
 import java.io.BufferedReader;
@@ -11,13 +13,16 @@ public class UserInterface implements IUserInterface {
     private static final String OUTPUT_MESSAGE = "Выводим результат поиска: %n ";
     private static final String ERROR_MESSAGE = "Произошла ошибка: ";
 
+    private static final Logger logger = Logger.getLogger(UserInterface.class);
+
     @Override
     public String getStringFromUser(BufferedReader reader) {
-        String expressionString = " ";
+        logger.setLevel(Level.ERROR);
+        String expressionString = "";
         try {
             expressionString = reader.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Input Error" + UserInterface.class.toString(), e);
         }
         return expressionString;
     }
