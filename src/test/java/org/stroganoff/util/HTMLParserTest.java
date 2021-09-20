@@ -13,9 +13,10 @@ class HTMLParserTest {
     @InjectMocks
     HTMLParser htmlParser;
 
-    public static final String HTML_TEST_CONTENT = "<!DOCTYPE html>\n<!-- saved from url=(0025)https://bash.im/quote/467 -->" +
-            "\n<html theme=\"light\" lang=\"ru\" data-controller=\"quote\" aside=\"true\">" +
-            "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">";
+    public static final String HTML_TEST_CONTENT = "<html theme=\"light\" lang=\"ru\" data-controller=\"quote\" aside=\"true\"><head>\n" +
+            "  <meta charset=\"utf-8\">\n" +
+            "  <title>Цитата #467 – Цитатник Рунета</title>\n" +
+            "      <meta property=\"og:type\" content=\"article\">";
 
     @Test
     void setContentString_NotHTML_TrowException() {
@@ -25,16 +26,16 @@ class HTMLParserTest {
     }
 
     @Test
-    void isContentHTML_Test_MustReturnTrue() throws HTMLParserException {
+    void isContentHTML_Test_MustReturnTrue() {
         // GIVEN
         String testContent = HTML_TEST_CONTENT;
         // WHEN
         // THEN
-        Assertions.assertTrue(htmlParser.isContentHTML(HTML_TEST_CONTENT));
+        Assertions.assertTrue(htmlParser.isContentHTML(testContent));
     }
 
     @Test
-    void getSubstringFromNotHTMLContent_TrowExceptionTest() throws HTMLParserException {
+    void getSubstringFromNotHTMLContent_TrowExceptionTest() {
         // GIVEN
         String simpleNotHTMLString = "abra";
         HTMLParser htmlParserTest = new HTMLParser(simpleNotHTMLString);

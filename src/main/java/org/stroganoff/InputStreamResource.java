@@ -8,8 +8,8 @@ import java.io.InputStreamReader;
 public interface InputStreamResource {
 
     /**
-     * @param resource
-     * @return
+     * @param resource - url address
+     * @return - stream of html page
      */
     InputStreamReader getResourceInputStream(String resource) throws URLInputStreamGetException, FileInputStreamReaderException;
 }

@@ -15,7 +15,7 @@ public class FileInputStreamReader implements InputStreamResource {
     public InputStreamReader getResourceInputStream(String resource) throws FileInputStreamReaderException {
 
         File file = new File(resource);
-        InputStreamReader inputStreamReader = null;
+        InputStreamReader inputStreamReader;
         logger.setLevel(Level.ERROR);
         try {
             InputStream input = new FileInputStream(file);

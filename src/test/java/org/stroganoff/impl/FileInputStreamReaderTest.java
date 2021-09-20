@@ -5,7 +5,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.stroganoff.exceptions.FileInputStreamReaderException;
-import org.stroganoff.exceptions.URLInputStreamGetException;
 
 import java.io.InputStreamReader;
 
@@ -18,7 +17,7 @@ class FileInputStreamReaderTest {
     FileInputStreamReader inputStreamReader;
 
     @Test
-    void getResourceInputStream() throws FileInputStreamReaderException, URLInputStreamGetException {
+    void getResourceInputStream() throws FileInputStreamReaderException {
         //GIVEN
         InputStreamReader actualInputStreamReader;
         //WHEN

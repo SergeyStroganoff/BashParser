@@ -16,8 +16,8 @@ public class URLInputStreamReader implements InputStreamResource {
 
     @Override
     public InputStreamReader getResourceInputStream(String resource) throws URLInputStreamGetException {
-        URL url = null;
-        InputStreamReader inputStreamReader = null;
+        URL url;
+        InputStreamReader inputStreamReader;
         logger.setLevel(Level.ERROR);
         try {
             url = new URL(resource);

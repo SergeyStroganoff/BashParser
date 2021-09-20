@@ -11,14 +11,14 @@ import java.io.IOException;
 public class UserInterface implements IUserInterface {
 
     private static final String INPUT_MESSAGE = "Введите в терминале ";
-    private static final String OUTPUT_MESSAGE = "Выводим результат поиска: %n ";
+    private static final String OUTPUT_MESSAGE = "Выводим результат поиска: \n ";
     private static final String ERROR_MESSAGE = "Произошла ошибка: ";
     private static final Logger logger = Logger.getLogger(UserInterface.class);
 
     @Override
     public String getStringFromUser(BufferedReader reader) throws UserInterfaceException {
         logger.setLevel(Level.ERROR);
-        String expressionString = "";
+        String expressionString;
         try {
             expressionString = reader.readLine();
         } catch (IOException e) {

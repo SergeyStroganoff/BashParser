@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HTMLParser {
-    public static final String DOCTYPE_HTML_REGEX = ".*DOCTYPE html.*";
+    public static final String DOCTYPE_HTML_REGEX = ".*<!doctype html>";
     public static final String ERROR_HTML_FORMAT_MESSAGE = "Попытка парсинга не HTML контента";
     String contentString;
 
@@ -31,11 +31,11 @@ public class HTMLParser {
         if (!isContentHTML(contentString)) {
             throw new HTMLParserException(ERROR_HTML_FORMAT_MESSAGE);
         }
-        String subString = null;
+        String subString;
         int startIndex = contentString.indexOf(startString);
         int endIndex = contentString.indexOf(endString);
         subString = contentString.substring(startIndex + startString.length(), endIndex - 17);
-        return subString;
+        return replaceSymbols(subString);
     }
 
     private String replaceSymbols(String string) {
@@ -44,8 +44,8 @@ public class HTMLParser {
                 .replaceAll("&lt", "<")
                 .replaceAll("&gt", ">")
                 .replaceAll("&quot", "\"")
-                .replaceAll("<br />", "\n")
-                .replaceAll(";", "");
+                .replaceAll("<br ?/?>", "\n")
+                .replaceAll(";", "")
+                .trim();
     }
-
 }
