@@ -22,7 +22,6 @@ class HTMLParserTest {
         //GIVEN
         String testString = "some string";
         Assertions.assertThrows(HTMLParserException.class, () -> htmlParser.setContentString(testString));
-
     }
 
     @Test

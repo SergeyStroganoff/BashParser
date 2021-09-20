@@ -27,7 +27,7 @@ public class HTMLParser {
         return matcher.lookingAt();
     }
 
-    String getSubstring(String startString, String endString) throws HTMLParserException {
+    public String getSubstring(String startString, String endString) throws HTMLParserException {
         if (!isContentHTML(contentString)) {
             throw new HTMLParserException(ERROR_HTML_FORMAT_MESSAGE);
         }

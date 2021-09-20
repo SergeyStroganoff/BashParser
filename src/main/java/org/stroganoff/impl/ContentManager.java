@@ -4,6 +4,8 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.stroganoff.Content;
 import org.stroganoff.exceptions.ContentManagerException;
+import org.stroganoff.exceptions.HTMLParserException;
+import org.stroganoff.util.HTMLParser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,11 +50,12 @@ public class ContentManager implements Content {
         return stringBuilder;
     }
 
+    // Вопрос - до каких уровней мы пробрасываем исключения где мы их обрабатываем при хорошей архитектуре
     @Override
-    public String getBashQuote(String contentString) {
+    public String getBashQuote(String contentString) throws HTMLParserException {
         String startString = "</header>    <div class=\"quote__body\">";
         String endString = "<footer class=\"quote__footer\">";
-        return null;
-
+        HTMLParser htmlParser = new HTMLParser(contentString);
+        return htmlParser.getSubstring(startString, endString);
     }
 }
