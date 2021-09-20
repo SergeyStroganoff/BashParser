@@ -4,7 +4,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.stroganoff.InputStreamResource;
 import org.stroganoff.exceptions.FileInputStreamReaderException;
-import org.stroganoff.exceptions.URLInputStreamGetException;
 
 import java.io.*;
 
@@ -13,7 +12,7 @@ public class FileInputStreamReader implements InputStreamResource {
     public static final String ERROR_GET_STREAM_FROM_FILE = "Error get stream from file ";
 
     @Override
-    public InputStreamReader getResourceInputStream(String resource) throws URLInputStreamGetException, FileInputStreamReaderException {
+    public InputStreamReader getResourceInputStream(String resource) throws FileInputStreamReaderException {
 
         File file = new File(resource);
         InputStreamReader inputStreamReader = null;

@@ -5,4 +5,6 @@ import org.stroganoff.exceptions.ContentManagerException;
 public interface Content {
 
     StringBuilder getAllContent() throws ContentManagerException;
+
+    String getBashQuote(String contentString);
 }
