@@ -11,14 +11,16 @@ import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class UserInterfaceTest {
 
-    public static final String INPUT_TEST_STRING = "Введите в терминале";
+    public static final String INPUT_TEST_STRING = "Введите в терминале ";
+    String ERROR_MESSAGE = "Произошла ошибка: ";
+    String OUTPUT_MESSAGE = "Выводим результат поиска: \n ";
     @InjectMocks
     UserInterface userInterface;
 
@@ -37,48 +39,50 @@ class UserInterfaceTest {
     @Test
     void showInputMessageTest() {
         // GIVEN
-        byte[] expected = INPUT_TEST_STRING.getBytes();
+        String expected = INPUT_TEST_STRING + "\r\n";
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(bos, true);
         PrintStream oldStream = System.out;
         System.setOut(printStream);
         // WHEN
         userInterface.showInputMessage("");
-        byte[] actualString = INPUT_TEST_STRING.getBytes();
-        // THEN
-        assertArrayEquals(expected, actualString);
+        String actual = bos.toString(StandardCharsets.UTF_8);
         System.setOut(oldStream);
+        // THEN
+        assertEquals(expected, actual);
     }
 
     @Test
     void showOutputMessageTest() {
         // GIVEN
-        byte[] expected = INPUT_TEST_STRING.getBytes();
+        String expected = OUTPUT_MESSAGE + "\r\n";
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(bos, true);
         PrintStream oldStream = System.out;
         System.setOut(printStream);
         // WHEN
         userInterface.showOutputMessage("");
-        byte[] actualString = INPUT_TEST_STRING.getBytes();
-        // THEN
-        assertArrayEquals(expected, actualString);
+        String actual = bos.toString(StandardCharsets.UTF_8);
         System.setOut(oldStream);
+        // THEN
+        assertEquals(expected, actual);
     }
 
     @Test
-    void showErrorMessageTest() {
+    void showErrorMessageTest() throws IOException {
         // GIVEN
-        byte[] expected = INPUT_TEST_STRING.getBytes();
+        String expected = ERROR_MESSAGE + "\r\n";
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(bos, true);
         PrintStream oldStream = System.out;
         System.setOut(printStream);
         // WHEN
         userInterface.showErrorMessage("");
-        byte[] actualString = INPUT_TEST_STRING.getBytes();
-        // THEN
-        assertArrayEquals(expected, actualString);
+        String actual = bos.toString(StandardCharsets.UTF_8);
         System.setOut(oldStream);
+        // THEN
+        assertEquals(expected, actual);
+
+
     }
 }
