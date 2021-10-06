@@ -69,7 +69,7 @@ class UserInterfaceTest {
     }
 
     @Test
-    void showErrorMessageTest() throws IOException {
+    void showErrorMessageTest() {
         // GIVEN
         String expected = ERROR_MESSAGE + "\r\n";
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -82,7 +82,5 @@ class UserInterfaceTest {
         System.setOut(oldStream);
         // THEN
         assertEquals(expected, actual);
-
-
     }
 }

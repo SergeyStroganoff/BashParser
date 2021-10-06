@@ -34,7 +34,7 @@ public class HTMLParser {
         String subString;
         int startIndex = contentString.indexOf(startString);
         int endIndex = contentString.indexOf(endString);
-        subString = contentString.substring(startIndex + startString.length(), endIndex - 17);
+        subString = contentString.substring(startIndex + startString.length(), endIndex);
         return replaceSymbols(subString);
     }
 
@@ -46,6 +46,7 @@ public class HTMLParser {
                 .replaceAll("&quot", "\"")
                 .replaceAll("<br ?/?>", "\n")
                 .replaceAll(";", "")
+                .replaceAll("</div>", "")
                 .trim();
     }
 }

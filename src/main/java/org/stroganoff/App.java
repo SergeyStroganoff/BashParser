@@ -2,9 +2,10 @@ package org.stroganoff;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.stroganoff.exceptions.*;
+import org.stroganoff.exceptions.ContentManagerException;
+import org.stroganoff.exceptions.HTMLParserException;
+import org.stroganoff.exceptions.UserInterfaceException;
 import org.stroganoff.impl.ContentManager;
-import org.stroganoff.impl.URLInputStreamReader;
 import org.stroganoff.impl.UserInterface;
 import org.stroganoff.util.StringValidator;
 
@@ -22,6 +23,7 @@ public class App {
     public static final String BASH_URL = "https://bash.im/quote/";
     public static final String ERROR_ACTION_MESSAGE = "выполнение программы будет прервано - ";
     public static final String WRONG_INPUT_STRING_MESSAGE = "Введенная строка не является номером цитаты \n Попробуйте еще раз";
+    public static final String INPUT_MESSAGE = "номер цитаты, для выхода 'q'";
 
     public static void main(String[] args) {
         loggerApp.setLevel(Level.INFO);
@@ -29,10 +31,9 @@ public class App {
         IUserInterface userInterface = new UserInterface();
         String quoteNumber = null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        InputStreamResource inputStreamResource = new URLInputStreamReader();
 
         while (true) {
-            userInterface.showInputMessage("номер цитаты, для выхода 'q'");
+            userInterface.showInputMessage(INPUT_MESSAGE);
             try {
                 quoteNumber = userInterface.getStringFromUser(bufferedReader);
             } catch (UserInterfaceException e) {
@@ -45,15 +46,7 @@ public class App {
             }
             if (StringValidator.isStringNumberQuote(quoteNumber)) {
                 String quoteURL = BASH_URL + quoteNumber;
-                InputStreamReader inputStreamReader = null;
-                try {
-                    inputStreamReader = inputStreamResource.getResourceInputStream(quoteURL);
-                } catch (URLInputStreamGetException | FileInputStreamReaderException e) {
-                    userInterface.showErrorMessage(ERROR_ACTION_MESSAGE + e.getMessage());
-                    System.exit(1);
-                }
-
-                Content content = new ContentManager(inputStreamReader);
+                Content content = new ContentManager(quoteURL);
                 try {
                     StringBuilder stringBufferContent = content.getAllContent();
                     loggerApp.info("successfully have got all page content from " + quoteURL);
